@@ -20,26 +20,23 @@ struct width{
     int w;
 };
 //function to generate a pointer to randomized 512 byte stream.
-struct block* fivetwelvegen(){
+struct block* fivetwelvegen(int ran){
   struct block* r;
   struct width w;
   struct length l;
   w.w=32;
   l.l=16;
   unsigned char hex[] = "0123456789ABCDEF";
-  int ran = 0;
 for(r->j=1;r->j<=w.w;r->j++)
 for(r->i=1;r->i<=l.l;r->i++)
   for(r->k=1;r->k<=(l.l*w.w);r->k++)
   if(ran==0)
-    ran=rand()%l.l;
   *r->res = hex[ran];
   r->i++;
   r->k++;
   if(r->i==(w.w+1))
     r->j++;
     r->i=1;
-    srand((unsigned)time(NULL));
 return r;
 }
 /*function to generate a pointer to the parity constant
@@ -87,6 +84,7 @@ void print_block(struct block* in){
     in->i=1;
 }
 int main(void){
+  srand((unsigned)time(NULL));
   char q;
   struct block* one;
   struct block* two;
@@ -94,13 +92,13 @@ int main(void){
   struct block* recov;
   struct width w;
   struct length l;
+  w.w=32;
+  l.l=16;
   byte res[1023];
   printf("Two random 512 byte blocks of data have been created.\n");
-//I CANNOT FIGURE OUT HOW TO RANDOMIZE THE FIRST VALUE OF THE FIRST BLOCK WHEN CALLED
-//IT IS A RANDOMIZED 512 BYTE VALUE, BUT IS ALWAYS INITIALIZED AT 55
-  one = fivetwelvegen();
+  one = fivetwelvegen((rand()%l.l));
   printf("The intializing value of block A is: %hhu\n", (*one->res));
-  two = fivetwelvegen();
+  two = fivetwelvegen((rand()%l.l));
   printf("The intializing value of block B is: %hhu\n", (*two->res));
   printf("Which block of data is to be recovered? (a or b): \n");
   scanf("%s", &q);
