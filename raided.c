@@ -73,19 +73,18 @@ return parity.res;
 void print_block(struct block* in){
   struct width w;
   struct length l;
-  while(in->j<=w.w){
-    while(in->i<=l.l){
-      for(in->k = 0; in->k<1024;in->k++)
-      printf("%s ",in->res);
-      printf(" ");
-        in->i++;
-      }
-    if(in->i==l.l+1) {
-      printf("\n");
-      in->j++;
-      in->i=0;
-      }
-    }
+  w.w=32;
+  l.l=16;
+  for(in->j=1;in->j<=w.w;in->j++)
+  for(in->i=1;in->i<=l.l;in->i++)
+    for(in->k=1;in->k<=1024;in->k++)
+    while(in->k<=1024)
+    printf("%hhu\n", *in->res);
+    printf(" ");
+    if(in->i==(l.l+1))
+    printf("\n");
+    in->j++;
+    in->i=1;
 }
 int main(void){
   char q;
@@ -105,24 +104,18 @@ int main(void){
   printf("The intializing value of block B is: %hhu\n", (*two->res));
   printf("Which block of data is to be recovered? (a or b): \n");
   scanf("%s", &q);
-  if(q=='a'){
+  if(q=='a')
     par = one;
-  }else if(q=='b'){
+  else if(q=='b')
     par = two;
-   }else {
-    printf("Not valid. Restart the program to attempt Raid Recovery again.\n");
-  }
   printf("RAID Parity Calculation in Progress... \n");
-  //FUNCTIONALITY ENDS HERE, PRINT_BLOCK IS STILL A WIP
   recov->res = calc_parity(par->res, one->res, two->res);
   printf("Press p to view the parity constant, press any other key to view the recovered data.\n");
   scanf("%s", &q);
-  if(q=='p'){
+  if(q=='p')
     print_block(recov);
-    printf("\n\n");
-  }else{
-  *recov->res=(*par->res)^(*recov->res);
+  else if(q!='p')
+    *recov->res=(*par->res)^(*recov->res);
     print_block(recov);
-  }
 return 0;
 }
