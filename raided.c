@@ -113,6 +113,7 @@ int main(void){
     printf("Not valid. Restart the program to attempt Raid Recovery again.\n");
   }
   printf("RAID Parity Calculation in Progress... \n");
+  //FUNCTIONALITY ENDS HERE, PRINT_BLOCK IS STILL A WIP
   recov->res = calc_parity(par->res, one->res, two->res);
   printf("Press p to view the parity constant, press any other key to view the recovered data.\n");
   scanf("%s", &q);
