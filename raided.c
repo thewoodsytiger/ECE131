@@ -32,6 +32,7 @@ for(r->i=1;r->i<=l.l;r->i++)
   for(r->k=1;r->k<=(l.l*w.w);r->k++)
   if(ran==0)
   *r->res = hex[ran];
+  ran=(rand()%l.l);
   r->i++;
   r->k++;
   if(r->i==(w.w+1))
